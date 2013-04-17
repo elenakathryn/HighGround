@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="format-detection" content="telephone-no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi">
+    <title>High Ground</title>
+    <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.0.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+    
+    <script>
+            // Bind to "mobileinit" before you load jquery.mobile.js
+            $(document).on( "mobileinit", function() {
+                           $.mobile.defaultPageTransition = "fade";
+                           });
+    </script>
+    
+    <!-- core -->
+    <script type="text/javascript" src="cordova-2.3.0.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+        
+       
+    <!--plugins -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="js/ui/jquery.ui.map.js"></script>
+    <script type="text/javascript" src="js/LocalNotification.js"></script>
+    <script type="text/javascript" src="js/Badge.js"></script>
+
+    <!--custom--> 
+    <script type="text/javascript" src="js/custom.js"></script>
+        
+        <style>
+            
+            /* Set the background image sources */
+            #Intro1 { background-image: url(img/intro/Scene1.png); }
+            #Intro2 { background-image: url(img/intro/Scene2.png); }
+            #Intro3 { background-image: url(img/intro/Scene3.png); }
+            #Intro4 { background-image: url(img/intro/Scene4.png); }
+            #Intro5 { background-image: url(img/intro/Scene5.png); }
+
+            /* Background settings */
+            .demo-page {
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+            
+            /* Transparent footer */
+            .ui-footer {
+                background: none;
+                border: none;
+            }
+            /* The footer won't have a height because there are only two absolute positioned elements in it.
+             So we position the buttons from the bottom. */
+            .control.ui-btn-right{
+                top: auto;
+                bottom: 7px;
+                margin: 0;
+            }
+            /* Custom styling for the trivia source */
+            small {
+                font-size: .75em;
+                color: #666;
+            }
+            /* Prevent text selection while swiping with mouse */
+            .ui-header, .ui-title, .control .ui-btn {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+            }
+        </style> 
+        
+</head>
+
+
+    
+<body onload="app.bodyLoad()">
+    
+    <div data-role="page" id="home">
+        
+        <div data-role="header">
+            
+        </div>
+        
+
+        <div data-role ="content">
+
+            
+            <div id="map_canvas" style="width:100%;height:400px"></div> <!--MAP! -->
+        </div>
+        
+        <div data-role="footer" data-position="fixed">
+            <div data-role = "navbar">
+                <ul>
+                    <li><a href="#messages" class="app-btn-new-badge" data-corners="true" data-rel="dialog" data-transition="fade" >Messages</a></li>
+                    <li><a href="#audio" data-corners="true" data-rel="dialog" data-transition="fade" >Audio</a></li>
+                    <li><a href="#briefs" data-corners="true" data-rel="dialog" data-transition="fade">Briefs</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /footer -->
+        
+        
+    </div><!-- /HOMEpage -->
+        
+    <div data-role="page" id="Intro1" class="demo-page" data-dom-cache="true" data-theme="a" data-next="Intro2">
+            
+            
+            <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+                <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                    
+                    <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                    <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+                </div>
+            </div><!-- /footer -->
+            
+    </div><!-- /INTRO1page -->
+        
+
+    <div data-role="page" id="Intro2" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro1" data-next="Intro3">
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /INTRO2page -->
+
+    <div data-role="page" id="Intro3" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro2" data-next="Intro4">
+        
+        
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /INTRO3page -->
+    
+    <div data-role="page" id="Intro4" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro3" data-next="Intro5">
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /INTRO4page -->
+    
+    <div data-role="page" id="Intro5" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro4">
+
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /INTRO5page -->
+    
+    <div data-role="page" id="breakVid" class="demo-page" data-theme="a">
+       <video id = "video" width="100%" height="100%" autoplay >
+            <source src="img/breakvideo4.m4v" type="video/mp4">
+        </video>
+        
+    </div> <!-- /VIDEOpage -->
+    
+    
+    <div data-role="page" id="messages">
+        
+        <div class="ui-header ui-bar-a" role="banner"><a href="index.html" data-transition="fade" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Messages</h1>
+        </div>
+        
+        <div data-role="content" class="ui-content ui-body-c" role="main">
+            <ul>
+                <li><a href="#stormAlerts" class = "textMessageLink" id="alertConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" >Storm Alerts</a></li>
+                
+                <li><a href="#carolineConvo" class = "textMessageLink" id="carolineConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" >Conversation with Caroline Rutledge</a></li>
+               
+                <li><a href="#lacyConvo" class = "textMessageLink" id="lacyConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" >Conversation with Lacy</a></li>
+                
+                <li><a href="#gerogeMomConvo" class = "textMessageLink" id="georgeMomConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" >Conversation with Ellen Costigan</a></li>
+                
+                <li><a href="#georgeConvo" class = "textMessageLink" id="georgeConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" > Conversation with George Costigan</a></li>
+                
+                <li><a href="#persisConvo" class = "textMessageLink" id="persisConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" >Conversation with Persis</a></li>
+                
+                <li><a href="#ragutnerConvo" class = "textMessageLink" id="ragutnerConvoLink" data-corners="true" data-rel="dialog" data-transition="slidefade" >Conversation with Ragutner</a></li>
+                
+            </ul>
+            
+        </div>
+        
+    </div> <!-- /TEXTSpage -->
+
+    
+    <div data-role="page" id = "audio">
+        <div class="ui-header ui-bar-a" role="banner"><a href="index.html"  data-transition="fade" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Audio</h1>
+        </div>
+        
+        
+        <div data-role="content" class="ui-content ui-body-c" role="main">
+            <a href="#" class="btn large" onclick="playAudio('audio/Scene1_mixdown.wav');">Play Audio</a>
+            <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
+            <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+            <p id="audio_position"></p>
+            
+        </div>
+    </div><!-- /Audiopage -->
+
+
+    <div data-role="page" id = "briefs">
+        <div class="ui-header ui-bar-a" role="banner"><a href="index.html"  data-transition="fade" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Briefs</h1>
+        </div>
+        
+        <div data-role="content" class="ui-content ui-body-c" role="main">
+            <ul>
+                <li><a href="#brief1" class = "briefLink" id="breif1link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1238</a></li>
+                
+                <li><a href="#brief2" class = "briefLink" id="breif2link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1239</a></li>
+                
+                <li><a href="#brief3" class = "briefLink" id="breif3link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1240</a></li>
+                
+                <li><a href="#brief4" class = "briefLink" id="breif4link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1241</a></li>
+                
+                <li><a href="#brief5" class = "briefLink" id="breif5link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1242</a></li>
+                
+                <li><a href="#brief6" class = "briefLink" id="breif6link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1243</a></li>
+                
+                <li><a href="#brief7" class = "briefLink" id="breif7link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1244</a></li>
+                
+                <li><a href="#brief8" class = "briefLink" id="breif8link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1245</a></li>
+                
+                <li><a href="#brief9" class = "briefLink" id="breif9link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1246</a></li>
+                
+                <li><a href="#brief10" class = "briefLink" id="breif10link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1247</a></li>
+                
+                <li><a href="#brief11" class = "briefLink" id="breif11link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1248</a></li>
+                
+                <li><a href="#brief12" class = "briefLink" id="breif12link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1249</a></li>
+                
+                <li><a href="#brief13" class = "briefLink" id="breif13link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1250</a></li>
+                
+                <li><a href="#brief14" class = "briefLink" id="breif14link" data-corners="true" data-rel="dialog" data-transition="pop" > Brief #1251</a></li>
+            </ul>
+        </div> <!--/content-->
+    </div><!--/Briefspage--> 
+    
+    
+    
+        <div data-role="page" id ="brief1" >
+                <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+                <h1 class="ui-title" role="heading" aria-level="1">#1238</h1>
+            </div>
+            <div data-role="content" class="ui-content ui-body-c" role="main">
+            <img id = "mayorLogo" src = "img/logos/mayorlogo.png" height = "100px" width = "auto">
+                <p> Today, we would remind you of our collective efforts to rebuild, reemploy and reconstitute ourselves as a nation. While our efforts to establish a solid infrastructure within the city have taken many steps forward in the last few years, we have not yet reached our goals. The storms continue to challenge our construction and renewal efforts.
+                We all must re-dedicate ourselves daily, but with a critical eye towards our actions’ value. Consider the broad implications of how you choose to contribute to our collective goals. Enabling the antiquated behaviors of pre-storm society benefit none but the weak.
+                In the upcoming days, we will be releasing updates on the Council’s progress on several important initiatives, including the Survey of Downed Power Distribution Networks and updates to the credits afforded in the Domiciliary Act. We look forward to updating you on our growth.
+                I remain the city’s humblest servant. </p>
+                <img id = "mayorSig" src="img/signatures/fultonstokes.png" height = "30px" width = "auto">
+            </div> <!--/brief1-->
+        </div><!--/page-->
+    
+    <div data-role="page" id ="brief2" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1239</h1>
+        </div>
+        <div data-role = "content">
+          <p>  Please remember that gas rationing was instituted for a reason and you may not receive more than one canister a week. Requests for additional means will not be entertained. 
+            </p>
+            <img id = "utilitieslogo" src= "img/logos/utilitieslogo.png" height = "30px" width="auto">
+            <p> The Office of Utility Rations</p>
+        </div> <!--/brief2-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" class="statPage" id ="brief3" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1240</h1>
+        </div>
+        <div data-role="content">
+           <img src="img/stats/brief1.jpg" height ="400px" width="auto">
+        </div>
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief4" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1241</h1>
+        </div>
+        <div data-role="content">
+            <h1>A Reminder on Transmitter Maintenance. <h1>
+            
+           <p> In order to provide the highest level of service and security to the remaining populous during our continued time of crisis, government issued transmitters must be worn and on at all times. Owing to the fragile nature of our infrastructure and the persistent unpredictability of the storms, we ask you to comply with the following important maintenance procedures at least once a week. 
+            </p>
+            <ul>
+            <li> Clean sand from speakers, buttons and knobs with a toothbrush and light spray of water. </li>
+                <li>Send a text based message at your scheduled test time.</li>
+            <li>Avoid placing your device on any materials known to retain static electricity: Glass, Aluminum, Wool and Fur.</li>
+             <li>If multiple surges have affected your device, report to your local police station for evaluation and source replacement.</li>
+            </ul>
+            <p> Stay Safe, Stay Connected. Watch for alerts and avoid storm sites. </p>
+        </div> <!--/brief4-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief5" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1242</h1>
+        </div>
+        <div data-role = "content" class = "stat" >
+            <img src="img/stats/brief2.jpg" height ="400px" width="auto">
+            
+        </div> <!--/brief5-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief6" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1243</h1>
+        </div>
+        <div data-role="content">
+           <h1> - ATTENTION -  </h1>
+          <p>  The Council has completed its vote on the Edible Waste Prevention Act. The affirmatives have one 74-36. Please attend to new rules and regulations on rations appearing in the upcoming weeks.</p>
+        </div> <!--/brief6-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief7" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1244</h1>
+        </div>
+        <div data-role = "content">
+            <h2> A Message from Secretary Hampstead regarding updates on additional benefits attendant to the Domiciliary act.</h2>
+            <p>
+            As per decisions made by Mayor Felton Stokes and the council, please note the 	following additional benefits recently added to Act #49, commonly known as the 	Domiciliary Act, with the ratification of amendment #19 on the 615th day after 	evacuation.
+            
+            Marrying couples in which both members are under the age of 23 will now receive and additional $100 stipend upon passing evaluations of their six-month 	partnership.
+            
+            Rations for women who are pregnant or have recently given birth, who are living with a legally bound partner will be increased by an extra 15% weekly.
+            
+            Recently married couples who rent or purchase property above 30ft and demonstrate satisfactory maintenance of such property will become eligible for 24.6% rebate in property taxes if filed within the appropriate time period.
+            
+            For more on the benefits that you can claim with the Domiciliary Act, please see your local officers.
+            </p>
+            <img id = "secretaryLogo" src= "img/logos/secretarylogo.png" height = "30px" width="auto">
+            <img id = "secretarySig" src = "img/signatures/hampstead.png" height = "30px" width = "auto">
+            
+        </div> <!--/brief7-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief8" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1245</h1>
+        </div>
+        <div data-role="content">
+            <img src="img/stats/brief3.jpg" height = "400px" width = "auto">
+            
+        </div> <!--/brief8-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief9" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1246</h1>
+        </div>
+        <div data-role="content">
+            <img id = "mayorLogo" src= "img/logos/secretarylogo.png" height = "30px" width="auto">
+            <p>
+            I could not be happier with Secretary Hampstead’s earlier message regarding the Domiciliary Act. Mayor Stokes and I are overjoyed that we could share our hopes for our future with you in this bill. As a woman about to embark on the exciting journey of marriage, I am comforted by the assistance that I know will be waiting for me on the other side. Not only am I proud of my fiancé in this instance, but I proud of him as my Mayor as well. We both look forward to our collective future and the further progress we will make with and for you all. 
+            </p> 
+            <img id = "erinSig" src = "img/signatures/thompson.png" height = "30px" width="auto">
+        </div> <!--/brief9-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief10" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back"  class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1247</h1>
+        </div>
+        <div data-role="content">
+            <img src="img/stats/brief4.jpg" height = "400px" width = "auto">
+
+        </div> <!--/brief10-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief11" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1248</h1>
+        </div>
+        <div data-role="content">
+            <h1>REWARD $250 CASH</h1>
+            <h2>H.W. Shillington or Automobile<h2>
+           <p> 25 Years of Age, 5 feet 7 1/2 inches tall. Blond Hair, Blue Eyes, Clean Shaven, Slightly bald on top. Wanted for assault and auto theft. Last seen in a five passenger grey touring car with license number MHE94Z. Wearing dark brown trousers, blue coat and dark hat. Shillington is known to reside in low grounds, near the city line. 
+            </p>
+                <img id = "councilLogo" src= "img/logos/councillogo.png" height = "30px" width="auto">
+        </div> <!--/brief11-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief12" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1249</h1>/
+        </div>
+        <div data-role="content">
+            <h2>A Message from Secretary Hampstead regarding updates on our Survey of Downed Power Distribution Networks</h2>
+           <p> Please see the attached map, which demonstrates the progress of our survey of the city’s power distribution networks. Having covered 75% of the area’s known power lines, we are happy to report that we are proceeding on schedule. These updates are designed to keep you aware of the connectivity and power conditions throughout the many levels of the city.</p>
+            <img id = "secretaryLogo" src= "img/logos/secretarylogo.png" height = "30px" width="auto">
+            <img id = "secretarySig" src = "img/signatures/hampstead.png" height = "30px" width = "auto">
+        </div> <!--/brief12 THERE'S A MAP MISSING HERE-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief13" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1250</h1>
+        </div>
+        <div data-role="content">
+             <img id = "mayorLogo" src = "img/logos/mayorlogo.png" height = "100px" width = "auto">
+                 Today, I reach out to you with a reminder of the progress reports of the past week. We are working tirelessly to build the best infrastructure in which those who work for it can reestablish connected and fulfilling lives. Surrounding yourself with our support and the support of fellow productive citizens is how we will move forward as a whole.
+                 The progress that we are making on mapping the networked electric and communication capabilities of the city, on rationing our resources so that those who are eligible receive adequate means of sustenance, and on creating an environment for the continued reestablishment of our righteous culture astound me every day.
+                 I am truly eager to see what we are able to accomplish next and I remain the city’s humblest servant.
+                 <img id = "mayorSig" src="img/signatures/fultonstokes.png" height = "30px" width = "auto">
+        </div> <!--/brief13-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="brief14" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#briefs" data-rel="back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">#1251</h1>
+        </div>
+        <div data-role="content">
+            <img src="img/stats/brief5.jpg" height = "400px" width = "auto">
+        </div> <!--/brief14-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="lacyConvo" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with Lacy</h1>
+        </div>
+            <div class = "textMessageFrom" id = "lacyText1">
+                <p>
+                Etta, love, are you Ok? Saw the notices in your neighborhood.
+                </p>
+            </div>
+        
+            <div class = "textMessageTo" id = "lacyText2">
+                <p>
+            	I’m fine, thank you! I presume you heard the other news, already? I’ll try to call this evening but if I can’t get through, let’s get together in a few days; lunch?
+                </p>
+            </div>
+        
+            <div class = "textMessageFrom" id = "lacyText3">
+                <p>
+                Yes, I heard the news! I’m so so happy for you! (We’re happy, right?) And I’m sorry we didn’t get to talk yesterday. Let’s definitely get together. I don’t know what my week is like yet, but I will call the boarding house and leave you a message. I don’t trust these things. Stuff always gets lost.
+                </p>
+            </div>
+        
+            <div class = "textMessageFrom" id = "lacyText4">
+                <p>
+                Ok I’ll see you tomorrow? You’ll definitely be able to get away?
+                </p>
+            </div>
+            <div class = "textMessageTo" id = "lacyText5">
+            <p>
+                I might be late. I’m sorry. I’ll let you know.
+            </p>
+        </div>
+        
+        </div> <!--/LacyConvo-->
+    </div><!--/page-->
+    
+
+    
+    <div data-role="page" id ="carolineConvo" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with Caroline Rutledge</h1>
+        </div>
+        <div class = "textMessageFrom" id = "carolineText1">
+            <p>
+            Don’t forget to pick up salt on your way back. I’ll pay you tonight. Remind me.
+            </p>
+        </div>
+        
+        <div class = "textMessageFrom" id = "carolineText2">
+            <p>
+            Where are you? I need your help with Mrs. Ancelli’s room. Please come back as soon as you get this.
+            </p>
+        </div>
+        <div class = "texteMessageFom" id = "carolineText3">
+            <p>
+            George is here looking for you...
+            </p>
+        </div>
+        
+    </div> <!--/carolineConvo-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="gerogeMomConvo" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with Ellen Costigan</h1>
+        </div>
+        <div class = "textMessageFrom" id = "gerogeMomText1">
+            <p>
+           We’re so excited to have you as part of the family, Etta! We know that you’ll make George a very happy man. Al and I look forward to meeting you soon. XOXO
+            </p>
+        </div>
+        
+    </div> <!--/gerogeMomConvo-->
+    </div><!--/page-->
+    
+    
+    <div data-role="page" id ="georgeConvo" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with George Costigan</h1>
+        </div>
+        <div class = "textMessageFrom" id = "georgeText1">
+            <p>
+            I thought of you walking back from work.
+            </p>
+        </div>
+        
+        <div class = "textMessageTo" id = "georgeText2">
+            <p>
+            Because of the uphill climb?
+            </p>
+        </div>
+        <div class = "textMessageFrom" id = "georgeText3">
+            <p>
+            So witty. Random things reminds me of you.
+            </p>
+        </div>
+        
+        <div class = "textMessageTo" id = "georgeText4">
+            <p>
+            That’s very sweet. And a vague enough to be worrisome.
+            </p>
+        </div>
+        <div class = "textMessageFrom" id = "georgeText5">
+            <p>
+            Glad I could contribute to your day.
+            </p>
+        </div>
+        
+        <div class = "textMessageFrom" id = "georgeText6">
+            <p>
+            I will be home late but we have a dinner tomorrow now. With my boss.
+            </p>
+        </div>
+        
+        <div class = "textMessageTo" id = "georgeText7">
+            <p>
+            That sounds fine. Is it formal?
+            </p>
+        </div>
+        <div class = "textMessageFrom" id = "georgeText8">
+            <p>
+            A little formal. You know how they are. Half way up the hill and all. And, I want to show you off.
+            
+            I’ll stop in when I get home.
+            </p>
+        </div>
+        <div class = "textMessageFrom" id = "georgeText9">
+            <p>
+            Etta, where did you go? What’s going on? I can not be late tonight.
+            </p>
+        </div>
+        
+        
+    </div> <!--/georgeConvo-->
+    </div><!--/page-->
+    
+    
+    
+    <div data-role="page" id ="persisConvo" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with Persis</h1>
+        </div>
+        <div class = "textMessageFrom" id = "persisText1">
+            <p>
+            Etta, it’s Persis. How about tomorrow, could we talk?
+            </p>
+        </div>
+        <div class = "textMessageTo" id = "persisText2">
+            <p>
+            Absolutely, tomorrow afternoon, I can meet you at The Cherry Tavern. Do you know that spot?
+            </p>
+        </div>
+        <div class = "textMessageFrom" id = "persisText3">
+            <p>
+            Yes. Ok. I will meet you there.
+            </p>
+        </div>
+        <div class = "textMessageFrom" id = "persisText4">
+            <p>
+            Etta - I hope that you know I really was trying to just help the girl. Please consider talking to the police, if you can. In the row houses on Sentinal, the door is marked Connolly. I would if I could.
+            I didn’t know who else to go to.
+            </p>
+        </div>
+        
+        
+    </div> <!--/persisConvo-->
+    </div><!--/page-->
+    
+    
+    
+    <div data-role="page" id ="ragutnerConvo" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with Persis</h1>
+        </div>
+        <div class = "textMessageFrom" id = "ragutnerText1">
+            <p>
+            It was lovely to meet you, Etta. You are such a sweet girl and lovely match for George. I look forward to chatting with you again!
+            </p>
+        </div>
+        
+    </div> <!--/ragutnerConvo-->
+    </div><!--/page-->
+    
+    <div data-role="page" id ="stormAlerts" >
+        <div class="ui-header ui-bar-a" role="banner"><a href="#messages" data-rel"back" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text" >Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow"></span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Conversation with Persis</h1>
+        </div>
+        <div class = "textMessageFrom" id = "stormAlert1">
+            <p> ALERT : Sand storms through the city middle grounds. Reminders: Do not enter the dust if you can avoid it. Immediately pull any vehicle to the side of the road. Stay down and cover your eyes and mouth. Inhalation of substantial dust should be treated immediately. Once the storm has passed, check your transmitter for full functionality.
+            Stay connected, stay safe. Heed warnings.
+            </p>
+        </div>
+        
+        <div class = "textMessageFrom" id = "stormAlert2">
+            <p> ALERT: Intermittent Sand Storms between lower and middle grounds. Do not proceed below 25ft above sea level unless it is necessary. Throughout the city - check transmitter periodically during the day for full functionality. Stay safe, stay connected. 
+            </p>
+        </div>
+        
+    </div> <!--/stormAlerts-->
+    </div><!--/page-->
+    
+</body>
+</html>
