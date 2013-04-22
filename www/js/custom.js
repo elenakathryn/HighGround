@@ -17,27 +17,27 @@ var contentLoaders = [
                       document.getElementById('alertConvoLink').style.display = 'block';
                       document.getElementById('carolineConvoLink').style.display = 'block';
                       document.getElementById('breif1link').style.display = 'block';
-                      if (loadCount != 1){
-                        if (firstListened == true){
-                        document.getElementById('lacyConvo').style.display = 'block';
-                        document.getElementbyId('brief2link').style.display = 'block';
+                      if (firstListened == true){
+                      document.getElementById('lacyConvoLink').style.display = 'block';
+                      document.getElementbyId('breif2link').style.display = 'block';
                         }
                       },
                       
                       
                       function loadContent2(){
                       document.getElementById('georgeMomConvoLink').style.display = 'block';
-                      document.getElementById('brief3link').style.display = 'block';
-                      document.getElementById('brief4link').style.display = 'block';
+                      document.getElementById('breif3link').style.display = 'block';
+                      document.getElementById('breif4link').style.display = 'block';
+
                       if (secondListened == true){
                       document.getElementById('lacyText2').style.display = 'block';
-                      document.getElementbyId('brief5link').style.display = 'block';
+                      document.getElementbyId('breif5link').style.display = 'block';
                         }
                       },
                       
                       function loadContent3(){
                       document.getElementById('lacyText3').style.display = 'block';
-                      document.getElementById('brief6link').style.display = 'block';
+                      document.getElementById('breif6link').style.display = 'block';
                       document.getElementById('georgeConvoLink').style.display = 'block';
                       document.getElementById('georgeText2').style.display = 'block';
                       document.getElementbyId('georgeText3').style.display = 'block';
@@ -46,7 +46,7 @@ var contentLoaders = [
                       document.getElementById('lacyText2').style.display = 'block';
                       document.getElementbyId('georgeText4').style.display = 'block';
                       document.getElementbyId('georgeText5').style.display = 'block';
-                      document.getElementById('brief7link').style.display = 'block';
+                      document.getElementById('breif7link').style.display = 'block';
                                             }
                       },
                       
@@ -54,7 +54,7 @@ var contentLoaders = [
                       function loadContent4(){
                       document.getElementById('georgeText6').style.display = 'block';
                       document.getElementById('georgeText7').style.display = 'block';
-                      document.getElementById('brief8link').style.display = 'block';
+                      document.getElementById('breif8link').style.display = 'block';
                       document.getElementById('persisConvoLink').style.display = 'block';
                       document.getElementById('persisText2').style.display = 'block';
                       
@@ -62,30 +62,30 @@ var contentLoaders = [
                       document.getElementById('carolineText2').style.display = 'block';
                       document.getElementById('gerogeText9').style.display = 'block';
                       document.getElementbyId('persisText3').style.display = 'block';
-                      document.getElementbyId('brief9link').style.display = 'block';
+                      document.getElementbyId('breif9link').style.display = 'block';
                         }
                       },
                       
                       function loadContent5(){
                       document.getElementById('lacyText4').style.display = 'block';
-                      document.getElementById('brief10link').style.display = 'block';
+                      document.getElementById('breif10link').style.display = 'block';
                       
                       if (fifthListened == true){
                       document.getElementById('gerogeText10').style.display = 'block';
                       document.getElementbyId('carolineText3').style.display = 'block';
-                      document.getElementbyId('brief11link').style.display = 'block';
+                      document.getElementbyId('breif11link').style.display = 'block';
                         }
                       },
                       
                       function loadContent6(){
                       document.getElementById('persisText4').style.display = 'block';
-                      document.getElementById('brief12link').style.display = 'block';
+                      document.getElementById('breif12link').style.display = 'block';
                       document.getElementById('ragutnerConvoLink').style.display = 'block';
                       
                       
                       if (fifthListened == true){
                       document.getElementbyId('lacyText5').style.display = 'block';
-                      document.getElementbyId('brief13link').style.display = 'block';
+                      document.getElementbyId('breif13link').style.display = 'block';
                         }
                       },
                       
@@ -419,10 +419,11 @@ function secondLocalNotification(){
                            notificationId  : 2,
                            callBack        : function(notificationId){
                                     showSecondAlert();
+                                    contentLoaders[1]();
+                           
                            }
                            });
     alertNumber = 2;
-    contentLoaders[1]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -436,10 +437,10 @@ function thirdLocalNotification(){
                            notificationId  : 3,
                            callBack        : function(notificationId){
                            showThirdAlert();
+                           contentLoaders[2]();
                            }
                            });
     alertNumber = 3;
-    contentLoaders[2]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -453,10 +454,10 @@ function fourthLocalNotification(){
                            notificationId  : 4,
                            callBack        : function(notificationId){
                            showFourthAlert();
+                           contentLoaders[3]();
                            }
                            });
     alertNumber = 4;
-    contentLoaders[3]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -470,10 +471,10 @@ function fifthLocalNotification(){
                            notificationId  : 5,
                            callBack        : function(notificationId){
                            showFifthAlert();
+                           contentLoaders[4]();
                            }
                            });
     alertNumber = 5;
-    contentLoaders[4]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -488,10 +489,10 @@ function sixthLocalNotification(){
                            notificationId  : 6,
                            callBack        : function(notificationId){
                            showSixthAlert();
+                           contentLoaders[5]();
                            }
                            });
     alertNumber = 6;
-    contentLoaders[5]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -505,10 +506,10 @@ function seventhLocalNotification(){
                            notificationId  : 7,
                            callBack        : function(notificationId){
                            showSeventhAlert();
+                           contentLoaders[6]();
                            }
                            });
     alertNumber = 7;
-    contentLoaders[6]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -544,9 +545,9 @@ function playVideo(){
 
 function onDeviceReady() {
     appOpenCounterHandler();
-    
     progressCounter = window.localStorage.getItem("alertNumber");
-    for (i = 0; i > progressCounter; i++){
+    for (var i = 0; i < progressCounter; i++){
+    
         contentLoaders[i]();
     }
 }
@@ -554,9 +555,13 @@ function onDeviceReady() {
 
 function onResume(){
     progressCounter = window.localStorage.getItem("alertNumber");
-    for (i = 0; i > progressCounter; i++){
-        contentLoaders[i]();
+    alert(progressCounter);
+    for (var i = 0; i < progressCounter; i++){
+    contentLoaders[i]();
     }
+  //  for (i = 0; i > progressCounter; i++){
+  //      contentLoaders[i]();
+  //  }
 }
 
 

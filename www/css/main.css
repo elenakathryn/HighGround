@@ -19,6 +19,34 @@
                 background-repeat: no-repeat;
 }
 
+.textMessageFrom{
+    background-color: #FF9966;
+     width: 100px;
+    height: 200px;
+   -moz-border-radius: 100px / 50px; 
+   -webkit-border-radius: 100px / 50px; 
+   border-radius: 100px / 50px; 
+    position: absolute;
+    font-size: 10px; 
+    font-color: ; 
+    text-align:left; 
+}
+
+.textMessageTo{
+    background-color: blue;
+     width: 100px;
+    height: 200px;
+   -moz-border-radius: 100px / 50px; 
+   -webkit-border-radius: 100px / 50px; 
+   border-radius: 100px / 50px; 
+    position: absolute;
+    right: 40px; 
+    font-size: 10px; 
+    font-color: ; 
+    text-align:right; 
+}
+
+
 
     .app-btn-new-badge .ui-btn-inner:before {
         content: '1';
