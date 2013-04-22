@@ -9,12 +9,8 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
     
-    <script>
-            // Bind to "mobileinit" before you load jquery.mobile.js
-            $(document).on( "mobileinit", function() {
-                           $.mobile.defaultPageTransition = "fade";
-                           });
-    </script>
+
+        
     
     <!-- core -->
     <script type="text/javascript" src="cordova-2.3.0.js"></script>
@@ -27,11 +23,30 @@
     <script type="text/javascript" src="js/ui/jquery.ui.map.js"></script>
     <script type="text/javascript" src="js/LocalNotification.js"></script>
     <script type="text/javascript" src="js/Badge.js"></script>
+    <script type="text/javascript" src="js/audiojs/audio.min.js"></script>
 
     <!--custom--> 
     <script type="text/javascript" src="js/custom.js"></script>
         
+        
+        <script>    
+            $(document).on( "mobileinit", function() {
+                           $.mobile.defaultPageTransition = "fade";
+                           });
+            
+        </script>
+        
         <style>
+            .audiojs{
+                width: 100%;
+                
+            }
+            
+            .audiojs .scrubber {
+                width: 75%;
+            }
+
+
             
             /* Set the background image sources */
             #Intro1 { background-image: url(img/intro/Scene1.png); }
@@ -72,7 +87,8 @@
                 -o-user-select: none;
                 user-select: none;
             }
-        </style> 
+            
+        </style>
         
 </head>
 
@@ -96,7 +112,7 @@
         <div data-role="footer" data-position="fixed">
             <div data-role = "navbar">
                 <ul>
-                    <li><a href="#messages" class="app-btn-new-badge" data-corners="true" data-rel="dialog" data-transition="fade" >Messages</a></li>
+                    <li><a href="#messages" class="app-btn-new-badge" id="messagenote" data-corners="true" data-rel="dialog" data-transition="fade" >Messages</a></li>
                     <li><a href="#audio" data-corners="true" data-rel="dialog" data-transition="fade" >Audio</a></li>
                     <li><a href="#briefs" data-corners="true" data-rel="dialog" data-transition="fade">Briefs</a></li>
                 </ul>
@@ -215,16 +231,14 @@
         <div class="ui-header ui-bar-a" role="banner"><a href="index.html"  data-transition="fade" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
             <h1 class="ui-title" role="heading" aria-level="1">Audio</h1>
         </div>
-        
-        
-        <div data-role="content" class="ui-content ui-body-c" role="main">
-            <a href="#" class="btn large" onclick="playAudio('audio/Scene1_mixdown.wav');">Play Audio</a>
-            <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
-            <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
-            <p id="audio_position"></p>
-            
-        </div>
-    </div><!-- /Audiopage -->
+        <audio id = "scene1player" src="audio/Scene1_mixdown.wav" preload="auto"></audio>
+        <audio id = "scene2player" src="audio/Scene2_mixdown.wav" preload="auto"></audio>
+        <audio id = "scene3player" src="audio/Scene3_mixdown.wav" preload="auto"></audio>
+        <audio id = "scene4player" src="audio/Scene4_mixdown.wav" preload="auto"></audio>
+        <audio id = "scene5player" src="audio/Scene5_mixdown.wav" preload="auto"></audio>
+        <audio id = "scene6player" src="audio/Scene6_mixdown.wav" preload="auto"></audio>
+        <audio id = "scene7player" src="audio/Scene7_mixdown.wav" preload="auto"></audio>
+        </div><!-- /Audiopage -->
 
 
     <div data-role="page" id = "briefs">
@@ -427,9 +441,10 @@
         <div data-role="content">
             <h2>A Message from Secretary Hampstead regarding updates on our Survey of Downed Power Distribution Networks</h2>
            <p> Please see the attached map, which demonstrates the progress of our survey of the city’s power distribution networks. Having covered 75% of the area’s known power lines, we are happy to report that we are proceeding on schedule. These updates are designed to keep you aware of the connectivity and power conditions throughout the many levels of the city.</p>
+            <img id = "citymap" src="img/city.jpg" height = "100px" width = "auto">
             <img id = "secretaryLogo" src= "img/logos/secretarylogo.png" height = "30px" width="auto">
             <img id = "secretarySig" src = "img/signatures/hampstead.png" height = "30px" width = "auto">
-        </div> <!--/brief12 THERE'S A MAP MISSING HERE-->
+        </div> 
     </div><!--/page-->
     
     
@@ -658,6 +673,7 @@
         
     </div> <!--/stormAlerts-->
     </div><!--/page-->
+
     
 </body>
 </html>

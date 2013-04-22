@@ -8,19 +8,13 @@ var appOpenCount = window.localStorage.getItem("loadCount");
 var progressCounter = window.localStorage.getItem("alertNumber"); 
 var alertNumber; 
 
-// Audio player
-//
-var my_media = null;
-var mediaTimer = null;
-
-var page; 
-
-
+var page;
+var as = audiojs;
+var audios = document.getElementsByTagName('audio');
 
 
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("resume", onResume, false);
-
 
 //first load swipe handlers 
 $( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
@@ -63,10 +57,12 @@ $( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
                  }
                  
                  if (page == "#Intro5"){
-                    window.setTimeout('playVideo()', 6000);
+                    window.setTimeout('playVideo()', 5000);
                  }
                  
+                 
                  });
+
 
 
 // NOTE TO SELF: REPLACE THE GELOPLOCATION HANDLER!
@@ -124,132 +120,193 @@ function appOpenCounterHandler() {
 }
 
 
-
-// Play audio
-//
-function playAudio(src) {
-    // Create Media object from src
-    my_media = new Media(src, onSuccess, onError);
-    
-    // Play audio
-    my_media.play();
-    
-    // Update my_media position every second
-    if (mediaTimer == null) {
-        mediaTimer = setInterval(function() {
-                                 // get my_media position
-                                 my_media.getCurrentPosition(
-                                                             // success callback
-                                                             function(position) {
-                                                             if (position > -1) {
-                                                             setAudioPosition((position) + " sec");
-                                                             }
-                                                             },
-                                                             // error callback
-                                                             function(e) {
-                                                             console.log("Error getting pos=" + e);
-                                                             setAudioPosition("Error: " + e);
-                                                             }
-                                                             );
-                                 }, 1000);
-    }
-}
-
-// Pause audio
-
-function pauseAudio() {
-    if (my_media) {
-        my_media.pause();
-    }
-}
-
-// Stop audio
-
-function stopAudio() {
-    if (my_media) {
-        my_media.stop();
-    }
-    clearInterval(mediaTimer);
-    mediaTimer = null;
-}
-
-// onSuccess Callback
-
-function onSuccess() {
-    console.log("playAudio():Audio Success");
-}
-
-// onError Callback
-
-function onError(error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
-}
-
-// Set audio position
-
-function setAudioPosition(position) {
-    document.getElementById('audio_position').innerHTML = position;
-}
-
-
-
-
 //Content Population
 
-function firstAlertDismissed(){
-    
-    progressCounter = window.localStorage.getItem("alertNumber");
-    $.mobile.changePage("#audio"); 
-    playAudio("audio/Scene"+progressCounter+"_mixdown.wav");
-    
-    var currentPos = my_media.getCurrentPosition();
-    var mediaLength = my_media.getDuration();
-    
-    if (currentPos >= mediaLength){
-        $.mobile.changePage("#briefs");
-        loadContent1(); 
-    }
 
-    
+
+
+as.events.ready(function() {
+                     progressCounter = window.localStorage.getItem("alertNumber");
+                     
+                     var a1 = audiojs.create(audios[0], {
+                                             //first end handler
+                                             trackEnded: function(){
+                                             if (progressCounter == 1){
+                                             $.mobile.changePage("#briefs");
+                                             secondLocalNotification();
+                                             }
+                                             }
+                                        });
+                     
+                     
+                });
+
+
+function playTime(){
+    progressCounter = window.localStorage.getItem("alertNumber");
+    $.mobile.changePage("#audio");
+    var audio = document.getElementById("scene"+progressCounter+"player");
+    audio.play();
 }
+
+
 
 function showFirstAlert() {
     navigator.notification.alert(
                                  'You now have access to Etta Wheatons Transmitter',  // message
-                                 firstAlertDismissed,         // callback
+                                 playTime,         // callback
                                  'Access Granted',            // title
                                  'Listen'                  // button Name
                                  );
 }
 
-function alertDismissed(){
+
+
+function secondAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    $.mobile.changePage("#audio");
-    playAudio("audio/Scene"+progressCounter+"_mixdown.wav");
-    
+    var a2 = audiojs.create(audios[progressCounter-1], {
+                            
+                            });
+    playTime(); 
 }
 
-function showAlert() {
+function showSecondAlert() {
     navigator.notification.alert(
                                  'You now have access to Etta Wheatons Transmitter',  // message
-                                 alertDismissed,         // callback
+                                 secondAlertDismissed,         // callback
                                  'Access Granted',            // title
                                  'Listen'                  // button Name
                                  );
 }
 
+
+function thirdAlertDismissed(){
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    var a3 = audiojs.create(audios[progressCounter-1], {
+                            
+                            });
+    playTime(); 
+}
+
+function showThirdAlert() {
+    navigator.notification.alert(
+                                 'You now have access to Etta Wheatons Transmitter',  // message
+                                 thirdAlertDismissed,         // callback
+                                 'Access Granted',            // title
+                                 'Listen'                  // button Name
+                                 );
+}
+
+
+function fourthAlertDismissed(){
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    var a4 = audiojs.create(audios[progressCounter-1], {
+                            
+                            });
+    playTime();
+}
+
+function showFourthAlert() {
+    navigator.notification.alert(
+                                 'You now have access to Etta Wheatons Transmitter',  // message
+                                 fourthAlertDismissed,         // callback
+                                 'Access Granted',            // title
+                                 'Listen'                  // button Name
+                                 );
+}
+
+
+function fifthAlertDismissed(){
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    var a5 = audiojs.create(audios[progressCounter-1], {
+                            
+                            });
+    playTime();
+}
+
+function showFifthAlert() {
+    navigator.notification.alert(
+                                 'You now have access to Etta Wheatons Transmitter',  // message
+                                 fifthAlertDismissed,         // callback
+                                 'Access Granted',            // title
+                                 'Listen'                  // button Name
+                                 );
+}
+
+
+
+function sixthAlertDismissed(){
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    var a6 = audiojs.create(audios[progressCounter-1], {
+                            
+                            });
+    playTime();
+}
+
+function showSixthAlert() {
+    navigator.notification.alert(
+                                 'You now have access to Etta Wheatons Transmitter',  // message
+                                 sixthAlertDismissed,         // callback
+                                 'Access Granted',            // title
+                                 'Listen'                  // button Name
+                                 );
+}
+
+
+function seventhAlertDismissed(){
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    var a7 = audiojs.create(audios[progressCounter-1], {
+                            
+                            });
+    playTime();
+}
+
+function showSeventhAlert() {
+    navigator.notification.alert(
+                                 'You now have access to Etta Wheatons Transmitter',  // message
+                                 seventhAlertDismissed,         // callback
+                                 'Access Granted',            // title
+                                 'Listen'                  // button Name
+                                 );
+}
 
 
 function loadContent1(){
     progressCounter = window.localStorage.getItem("alertNumber");
     document.getElementById('alertConvoLink').style.display = 'block';
     document.getElementById('carolineConvoLink').style.display = 'block';
-    document.getElementById('lacyConvoLink').style.display = 'block';
     document.getElementById('breif1link').style.display = 'block';
-    
+}
 
+
+function loadContent2(){
+    
+}
+
+function loadContent3(){
+    
+}
+
+function loadContent4(){
+    
+}
+
+function loadContent5(){
+    
+}
+
+function loadContent6(){
+    
+}
+
+function loadContent7(){
+    
 }
 
 //Custom Local Notification Handlers
@@ -276,7 +333,7 @@ function firstLocalNotification(){
 
 function secondLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -288,10 +345,88 @@ function secondLocalNotification(){
                            });
     alertNumber = 2;
     window.localStorage.setItem("alertNumber", alertNumber);
+}
 
+function thirdLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 3,
+                           callBack        : function(notificationId){
+                           showAlert();
+                           }
+                           });
+    alertNumber = 3;
+    window.localStorage.setItem("alertNumber", alertNumber);
+}
+
+function fourthLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 4,
+                           callBack        : function(notificationId){
+                           showAlert();
+                           }
+                           });
+    alertNumber = 4;
+    window.localStorage.setItem("alertNumber", alertNumber);
+}
+
+function fifthLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 5,
+                           callBack        : function(notificationId){
+                           showAlert();
+                           }
+                           });
+    alertNumber = 5;
+    window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 
+function sixthLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 6,
+                           callBack        : function(notificationId){
+                           showAlert();
+                           }
+                           });
+    alertNumber = 6;
+    window.localStorage.setItem("alertNumber", alertNumber);
+}
+
+function seventhLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 7,
+                           callBack        : function(notificationId){
+                           showAlert();
+                           }
+                           });
+    alertNumber = 7;
+    window.localStorage.setItem("alertNumber", alertNumber);
+}
 
 
 //First Load Sequence
@@ -345,9 +480,8 @@ function onDeviceReady() {
 function onResume(){
     progressCounter = window.localStorage.getItem("alertNumber");
     alert("you've recived the following number of alerts:" + progressCounter);
+
 }
-
-
 
 
 
