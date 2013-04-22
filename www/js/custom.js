@@ -12,6 +12,93 @@ var page;
 var as = audiojs;
 var audios = document.getElementsByTagName('audio');
 
+var contentLoaders = [
+                      function loadContent1(){
+                      document.getElementById('alertConvoLink').style.display = 'block';
+                      document.getElementById('carolineConvoLink').style.display = 'block';
+                      document.getElementById('breif1link').style.display = 'block';
+                      if (loadCount != 1){
+                        if (firstListened == true){
+                        document.getElementById('lacyConvo').style.display = 'block';
+                        document.getElementbyId('brief2link').style.display = 'block';
+                        }
+                      },
+                      
+                      
+                      function loadContent2(){
+                      document.getElementById('georgeMomConvoLink').style.display = 'block';
+                      document.getElementById('brief3link').style.display = 'block';
+                      document.getElementById('brief4link').style.display = 'block';
+                      if (secondListened == true){
+                      document.getElementById('lacyText2').style.display = 'block';
+                      document.getElementbyId('brief5link').style.display = 'block';
+                        }
+                      },
+                      
+                      function loadContent3(){
+                      document.getElementById('lacyText3').style.display = 'block';
+                      document.getElementById('brief6link').style.display = 'block';
+                      document.getElementById('georgeConvoLink').style.display = 'block';
+                      document.getElementById('georgeText2').style.display = 'block';
+                      document.getElementbyId('georgeText3').style.display = 'block';
+                      
+                      if (thirdListened == true){
+                      document.getElementById('lacyText2').style.display = 'block';
+                      document.getElementbyId('georgeText4').style.display = 'block';
+                      document.getElementbyId('georgeText5').style.display = 'block';
+                      document.getElementById('brief7link').style.display = 'block';
+                                            }
+                      },
+                      
+                      
+                      function loadContent4(){
+                      document.getElementById('georgeText6').style.display = 'block';
+                      document.getElementById('georgeText7').style.display = 'block';
+                      document.getElementById('brief8link').style.display = 'block';
+                      document.getElementById('persisConvoLink').style.display = 'block';
+                      document.getElementById('persisText2').style.display = 'block';
+                      
+                      if (fourthListened == true){
+                      document.getElementById('carolineText2').style.display = 'block';
+                      document.getElementById('gerogeText9').style.display = 'block';
+                      document.getElementbyId('persisText3').style.display = 'block';
+                      document.getElementbyId('brief9link').style.display = 'block';
+                        }
+                      },
+                      
+                      function loadContent5(){
+                      document.getElementById('lacyText4').style.display = 'block';
+                      document.getElementById('brief10link').style.display = 'block';
+                      
+                      if (fifthListened == true){
+                      document.getElementById('gerogeText10').style.display = 'block';
+                      document.getElementbyId('carolineText3').style.display = 'block';
+                      document.getElementbyId('brief11link').style.display = 'block';
+                        }
+                      },
+                      
+                      function loadContent6(){
+                      document.getElementById('persisText4').style.display = 'block';
+                      document.getElementById('brief12link').style.display = 'block';
+                      document.getElementById('ragutnerConvoLink').style.display = 'block';
+                      
+                      
+                      if (fifthListened == true){
+                      document.getElementbyId('lacyText5').style.display = 'block';
+                      document.getElementbyId('brief13link').style.display = 'block';
+                        }
+                      },
+                      
+                      function loadContent7(){
+                      document.getElementByid('stormAlert2').style.display = 'block';
+                      document.getElementbyId('brief14link').style.display = 'block';
+                      }
+                      
+];
+
+
+
+var firstListened, secondListened, thirdListened, fourthListened, fifthListened, sixthListened = false; 
 
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("resume", onResume, false);
@@ -133,6 +220,7 @@ as.events.ready(function() {
                                              trackEnded: function(){
                                              if (progressCounter == 1){
                                              $.mobile.changePage("#briefs");
+                                             firstListened = true;
                                              secondLocalNotification();
                                              }
                                              }
@@ -165,10 +253,13 @@ function showFirstAlert() {
 function secondAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    var a2 = audiojs.create(audios[progressCounter-1], {
-                            
+    var a2 = audiojs.create(audios[1], {
+                            trackEnded: function(){
+                            secondListened = true;
+                            thirdLocalNotification();
+                            }
                             });
-    playTime(); 
+    playTime();
 }
 
 function showSecondAlert() {
@@ -184,8 +275,11 @@ function showSecondAlert() {
 function thirdAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    var a3 = audiojs.create(audios[progressCounter-1], {
-                            
+    var a3 = audiojs.create(audios[2], {
+                            trackEnded: function(){
+                            thirdListened = true;
+                            fourthLocalNotification();
+                            }
                             });
     playTime(); 
 }
@@ -203,8 +297,11 @@ function showThirdAlert() {
 function fourthAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    var a4 = audiojs.create(audios[progressCounter-1], {
-                            
+    var a4 = audiojs.create(audios[3], {
+                            trackEnded: function(){
+                            fourthListened = true;
+                            fourthLocalNotification();
+                            }
                             });
     playTime();
 }
@@ -222,8 +319,11 @@ function showFourthAlert() {
 function fifthAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    var a5 = audiojs.create(audios[progressCounter-1], {
-                            
+    var a5 = audiojs.create(audios[4], {
+                            trackEnded: function(){
+                            fifthListened = true;
+                            sixthLocalNotification();
+                            }
                             });
     playTime();
 }
@@ -242,8 +342,11 @@ function showFifthAlert() {
 function sixthAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    var a6 = audiojs.create(audios[progressCounter-1], {
-                            
+    var a6 = audiojs.create(audios[5], {
+                            trackEnded: function(){
+                            sixthListened = true;
+                            seventhLocalNotification();
+                            }
                             });
     playTime();
 }
@@ -261,8 +364,10 @@ function showSixthAlert() {
 function seventhAlertDismissed(){
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    var a7 = audiojs.create(audios[progressCounter-1], {
-                            
+    var a7 = audiojs.create(audios[6], {
+                            trackEnded: function(){
+                            seventhListened = true;
+                            }
                             });
     playTime();
 }
@@ -277,37 +382,10 @@ function showSeventhAlert() {
 }
 
 
-function loadContent1(){
-    progressCounter = window.localStorage.getItem("alertNumber");
-    document.getElementById('alertConvoLink').style.display = 'block';
-    document.getElementById('carolineConvoLink').style.display = 'block';
-    document.getElementById('breif1link').style.display = 'block';
-}
 
 
-function loadContent2(){
-    
-}
 
-function loadContent3(){
-    
-}
 
-function loadContent4(){
-    
-}
-
-function loadContent5(){
-    
-}
-
-function loadContent6(){
-    
-}
-
-function loadContent7(){
-    
-}
 
 //Custom Local Notification Handlers
 //
@@ -326,105 +404,111 @@ function firstLocalNotification(){
                            });
     alertNumber= 1;
     window.localStorage.setItem("alertNumber", alertNumber);
-    loadContent1();
+    contentLoaders[0]();
     window.plugins.badge.set(alertNumber);
 
 }
 
 function secondLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
                            badge           : 0,
                            notificationId  : 2,
                            callBack        : function(notificationId){
-                                    showAlert(); 
+                                    showSecondAlert();
                            }
                            });
     alertNumber = 2;
+    contentLoaders[1]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function thirdLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
                            badge           : 0,
                            notificationId  : 3,
                            callBack        : function(notificationId){
-                           showAlert();
+                           showThirdAlert();
                            }
                            });
     alertNumber = 3;
+    contentLoaders[2]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function fourthLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
                            badge           : 0,
                            notificationId  : 4,
                            callBack        : function(notificationId){
-                           showAlert();
+                           showFourthAlert();
                            }
                            });
     alertNumber = 4;
+    contentLoaders[3]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function fifthLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
                            badge           : 0,
                            notificationId  : 5,
                            callBack        : function(notificationId){
-                           showAlert();
+                           showFifthAlert();
                            }
                            });
     alertNumber = 5;
+    contentLoaders[4]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 
 function sixthLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
                            badge           : 0,
                            notificationId  : 6,
                            callBack        : function(notificationId){
-                           showAlert();
+                           showSixthAlert();
                            }
                            });
     alertNumber = 6;
+    contentLoaders[5]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function seventhLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
                            badge           : 0,
                            notificationId  : 7,
                            callBack        : function(notificationId){
-                           showAlert();
+                           showSeventhAlert();
                            }
                            });
     alertNumber = 7;
+    contentLoaders[6]();
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -453,14 +537,6 @@ function playVideo(){
 
 
 
-//Ending
-//
-
-function endCredits(){
-    
-}
-
-
 
 
 //Execution
@@ -470,17 +546,17 @@ function onDeviceReady() {
     appOpenCounterHandler();
     
     progressCounter = window.localStorage.getItem("alertNumber");
-    if (progressCounter > 0){
-        loadContent1();
+    for (i = 0; i > progressCounter; i++){
+        contentLoaders[i]();
     }
-    
 }
 
 
 function onResume(){
     progressCounter = window.localStorage.getItem("alertNumber");
-    alert("you've recived the following number of alerts:" + progressCounter);
-
+    for (i = 0; i > progressCounter; i++){
+        contentLoaders[i]();
+    }
 }
 
 
