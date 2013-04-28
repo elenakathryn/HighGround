@@ -11,101 +11,108 @@ var alertNumber;
 var page;
 var as = audiojs;
 var audios = document.getElementsByTagName('audio');
+var listenedNumber = 0; 
 
-var contentLoaders = [
+
+    var contentLoaders = [
                       function loadContent1(){
-                      document.getElementById('alertConvoLink').style.display = 'block';
-                      document.getElementById('carolineConvoLink').style.display = 'block';
-                      document.getElementById('breif1link').style.display = 'block';
-                      if (firstListened == true){
-                      document.getElementById('lacyConvoLink').style.display = 'block';
-                      document.getElementbyId('breif2link').style.display = 'block';
+                      document.getElementById('alertConvoLink').style.visibility = 'visible';
+                      document.getElementById('breif1link').style.visibility = 'visible';
+                      if (listenedBools[0] == true){
+                      document.getElementById('carolineConvoLink').style.visibility = 'visible';
+                      document.getElementById('breif2link').style.visibility = 'visible';
                         }
                       },
                       
                       
                       function loadContent2(){
-                      document.getElementById('georgeMomConvoLink').style.display = 'block';
-                      document.getElementById('breif3link').style.display = 'block';
-                      document.getElementById('breif4link').style.display = 'block';
+                      document.getElementById('lacyConvoLink').style.visibility = 'visible';
+                      document.getElementById('breif3link').style.visibility = 'visible';
+                      document.getElementById('breif4link').style.visibility = 'visible';
 
-                      if (secondListened == true){
-                      document.getElementById('lacyText2').style.display = 'block';
-                      document.getElementbyId('breif5link').style.display = 'block';
+                      if (listenedBools[1] == true){
+                      document.getElementById('georgeMomConvoLink').style.visibility = 'visible';
+                      document.getElementById('breif5link').style.visibility = 'visible';
                         }
                       },
                       
                       function loadContent3(){
-                      document.getElementById('lacyText3').style.display = 'block';
-                      document.getElementById('breif6link').style.display = 'block';
-                      document.getElementById('georgeConvoLink').style.display = 'block';
-                      document.getElementById('georgeText2').style.display = 'block';
-                      document.getElementbyId('georgeText3').style.display = 'block';
+                      document.getElementById('lacyText2').style.visibility = 'visible';
+                      document.getElementById('breif6link').style.visibility = 'visible';
+                      document.getElementById('carolineText2').style.visibility = 'visible';
+
                       
-                      if (thirdListened == true){
-                      document.getElementById('lacyText2').style.display = 'block';
-                      document.getElementbyId('georgeText4').style.display = 'block';
-                      document.getElementbyId('georgeText5').style.display = 'block';
-                      document.getElementById('breif7link').style.display = 'block';
+                      if (listenedBools[2] == true){
+                          document.getElementById('georgeConvoLink').style.visibility = 'visible';
+                          document.getElementById('georgeText2').style.visibility = 'visible';
+                          document.getElementById('georgeText3').style.visibility = 'visible';
+                          document.getElementById('georgeText4').style.visibility = 'visible';
+                          document.getElementById('georgeText5').style.visibility = 'visible';
+                          document.getElementById('breif7link').style.visibility = 'visible';
                                             }
                       },
                       
                       
                       function loadContent4(){
-                      document.getElementById('georgeText6').style.display = 'block';
-                      document.getElementById('georgeText7').style.display = 'block';
-                      document.getElementById('breif8link').style.display = 'block';
-                      document.getElementById('persisConvoLink').style.display = 'block';
-                      document.getElementById('persisText2').style.display = 'block';
-                      
-                      if (fourthListened == true){
-                      document.getElementById('carolineText2').style.display = 'block';
-                      document.getElementById('gerogeText9').style.display = 'block';
-                      document.getElementbyId('persisText3').style.display = 'block';
-                      document.getElementbyId('breif9link').style.display = 'block';
+                      document.getElementById('lacyText3').style.visibility = 'visible';
+                      document.getElementById('georgeText6').style.visibility = 'visible';
+                      document.getElementById('georgeText7').style.visibility = 'visible';
+                      document.getElementById('breif8link').style.visibility = 'visible';
+                        
+                      if (listenedBools[3] == true){
+                          document.getElementById('georgeText8').style.visibility = 'visible';
+                          document.getElementById('persisConvoLink').style.visibility = 'visible';
+                          document.getElementById('persisText2').style.visibility = 'visible';
+                          document.getElementById('breif9link').style.visibility = 'visible';
                         }
                       },
                       
                       function loadContent5(){
-                      document.getElementById('lacyText4').style.display = 'block';
-                      document.getElementById('breif10link').style.display = 'block';
+                          document.getElementById('persisText3').style.visibility = 'visible';
+                      document.getElementById('breif10link').style.visibility = 'visible';
                       
-                      if (fifthListened == true){
-                      document.getElementById('gerogeText10').style.display = 'block';
-                      document.getElementbyId('carolineText3').style.display = 'block';
-                      document.getElementbyId('breif11link').style.display = 'block';
+                      if (listenedBools[4] == true){
+                          document.getElementById('lacyText4').style.visibility = 'visible';
+                          document.getElementById('carolineText3').style.visibility = 'visible';
+                          document.getElementById('breif11link').style.visibility = 'visible';
+                          document.getElementById('georgeText9').style.visibility = 'visible';
+
                         }
                       },
                       
                       function loadContent6(){
-                      document.getElementById('persisText4').style.display = 'block';
-                      document.getElementById('breif12link').style.display = 'block';
-                      document.getElementById('ragutnerConvoLink').style.display = 'block';
+                      document.getElementById('breif12link').style.visibility = 'visible';
+                      document.getElementById('ragutnerConvoLink').style.visibility = 'visible';
                       
                       
-                      if (fifthListened == true){
-                      document.getElementbyId('lacyText5').style.display = 'block';
-                      document.getElementbyId('breif13link').style.display = 'block';
+                      if (listenedBools[5] == true){
+                          document.getElementById('persisText4').style.visibility = 'visible';
+                          document.getElementById('breif13link').style.visibility = 'visible';
                         }
                       },
                       
                       function loadContent7(){
-                      document.getElementByid('stormAlert2').style.display = 'block';
-                      document.getElementbyId('brief14link').style.display = 'block';
+                          document.getElementById('lacyText5').style.visibility = 'visible';
+                          document.getElementById('stormAlert2').style.visibility = 'visible';
+                          document.getElementById('breif14link').style.visibility = 'visible';
                       }
-                      
+            
 ];
 
 
 
-var firstListened, secondListened, thirdListened, fourthListened, fifthListened, sixthListened = false; 
+var listenedBools = [false, false, false, false, false, false, false];
+
+$(document).live("pagecreate", function() {
+                 navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+                 });
 
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("resume", onResume, false);
 
 //first load swipe handlers 
 $( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
-                 
+
                  
                 page = "#" + $( this ).attr( "id" ),
                  // Get the filename of the next page that we stored in the data-next attribute
@@ -153,9 +160,7 @@ $( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
 
 
 // NOTE TO SELF: REPLACE THE GELOPLOCATION HANDLER!
-//$(document).live("pagecreate", function() {
-  //               navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-    //             });
+
 
 
 //Geolocaiton Handlers
@@ -200,6 +205,7 @@ function appOpenCounterHandler() {
     if (appOpenCount > 0){
         appOpenCount++;
         window.localStorage.setItem("loadCount", appOpenCount);
+        loopForContent(); 
     } else {
         window.localStorage.setItem("loadCount", 1);
         onFirstLoad();
@@ -220,7 +226,9 @@ as.events.ready(function() {
                                              trackEnded: function(){
                                              if (progressCounter == 1){
                                              $.mobile.changePage("#briefs");
-                                             firstListened = true;
+                                             listenedBools[0] = true;
+                                             listenedNumber--;
+                                             window.plugins.badge.set(listenedNumber);
                                              secondLocalNotification();
                                              }
                                              }
@@ -255,7 +263,9 @@ function secondAlertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     var a2 = audiojs.create(audios[1], {
                             trackEnded: function(){
-                            secondListened = true;
+                            listenedBools[1] = true;
+                            listenedNumber--;
+                            window.plugins.badge.set(listenedNumber);
                             thirdLocalNotification();
                             }
                             });
@@ -277,7 +287,9 @@ function thirdAlertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     var a3 = audiojs.create(audios[2], {
                             trackEnded: function(){
-                            thirdListened = true;
+                            listenedBools[2] = true;
+                            listenedNumber--;
+                            window.plugins.badge.set(listenedNumber);
                             fourthLocalNotification();
                             }
                             });
@@ -299,8 +311,10 @@ function fourthAlertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     var a4 = audiojs.create(audios[3], {
                             trackEnded: function(){
-                            fourthListened = true;
-                            fourthLocalNotification();
+                            listenedBools[3] = true;
+                            listenedNumber--;
+                            window.plugins.badge.set(listenedNumber);
+                            fifthLocalNotification();
                             }
                             });
     playTime();
@@ -321,7 +335,9 @@ function fifthAlertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     var a5 = audiojs.create(audios[4], {
                             trackEnded: function(){
-                            fifthListened = true;
+                            listenedBools[4] = true;
+                            listenedNumber--;
+                            window.plugins.badge.set(listenedNumber);
                             sixthLocalNotification();
                             }
                             });
@@ -344,7 +360,9 @@ function sixthAlertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     var a6 = audiojs.create(audios[5], {
                             trackEnded: function(){
-                            sixthListened = true;
+                            listenedBools[5] = true;
+                            listenedNumber--;
+                            window.plugins.badge.set(listenedNumber);
                             seventhLocalNotification();
                             }
                             });
@@ -366,7 +384,9 @@ function seventhAlertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     var a7 = audiojs.create(audios[6], {
                             trackEnded: function(){
-                            seventhListened = true;
+                            listenedBools[6] = true;
+                            listenedNumber--;
+                            window.plugins.badge.set(listenedNumber);
                             }
                             });
     playTime();
@@ -392,7 +412,7 @@ function showSeventhAlert() {
 
 function firstLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 13),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 11),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -405,13 +425,13 @@ function firstLocalNotification(){
     alertNumber= 1;
     window.localStorage.setItem("alertNumber", alertNumber);
     contentLoaders[0]();
-    window.plugins.badge.set(alertNumber);
-
+    listenedNumber++;
+    window.plugins.badge.set(listenedNumber);
 }
 
 function secondLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 600),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -420,16 +440,17 @@ function secondLocalNotification(){
                            callBack        : function(notificationId){
                                     showSecondAlert();
                                     contentLoaders[1]();
-                           
                            }
                            });
     alertNumber = 2;
+    listenedNumber++;
     window.localStorage.setItem("alertNumber", alertNumber);
+    window.plugins.badge.set(listenedNumber);
 }
 
 function thirdLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 900),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -441,12 +462,14 @@ function thirdLocalNotification(){
                            }
                            });
     alertNumber = 3;
+    listenedNumber++;
+    window.plugins.badge.set(listenedNumber);
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function fourthLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 1200),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -458,12 +481,14 @@ function fourthLocalNotification(){
                            }
                            });
     alertNumber = 4;
+    listenedNumber++;
+    window.plugins.badge.set(listenedNumber);
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function fifthLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 1200),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -475,13 +500,15 @@ function fifthLocalNotification(){
                            }
                            });
     alertNumber = 5;
+    listenedNumber++;
+    window.plugins.badge.set(listenedNumber);
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 
 function sixthLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 1200),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -493,12 +520,14 @@ function sixthLocalNotification(){
                            }
                            });
     alertNumber = 6;
+    listenedNumber++;
+    window.plugins.badge.set(listenedNumber);
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
 function seventhLocalNotification(){
     window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           fireDate        : Math.round(new Date().getTime()/1000 + 1200),
                            alertBody       : "You now have access to Etta Wheaton's Transmitter",
                            repeatInterval  : "0",
                            soundName       : "horn.caf",
@@ -510,6 +539,8 @@ function seventhLocalNotification(){
                            }
                            });
     alertNumber = 7;
+    listenedNumber++;
+    window.plugins.badge.set(listenedNumber);
     window.localStorage.setItem("alertNumber", alertNumber);
 }
 
@@ -537,31 +568,39 @@ function playVideo(){
 }
 
 
-
+function loopForContent(){
+    var j = 0;
+    var v = 0;
+    var k = progressCounter - 1;
+    for (j = 0; j< k; j++){
+        listenedBools[j] = true;
+        contentLoaders[j]();
+        if (progressCounter > 0){
+        var a = audiojs.create(audios[j]);
+        }
+    }
+    if (progressCounter == 7){
+        contentLoaders[6]();
+        var a = audiojs.create(audios[6]);
+    }
+ //   alert("hi");
+}
 
 
 //Execution
 //
 
 function onDeviceReady() {
-    appOpenCounterHandler();
     progressCounter = window.localStorage.getItem("alertNumber");
-    for (var i = 0; i < progressCounter; i++){
-    
-        contentLoaders[i]();
-    }
+    appOpenCounterHandler();
+ //   alert(progressCounter);
 }
 
 
 function onResume(){
     progressCounter = window.localStorage.getItem("alertNumber");
-    alert(progressCounter);
-    for (var i = 0; i < progressCounter; i++){
-    contentLoaders[i]();
-    }
-  //  for (i = 0; i > progressCounter; i++){
-  //      contentLoaders[i]();
-  //  }
+  //  alert(progressCounter);
+    loopForContent();
 }
 
 

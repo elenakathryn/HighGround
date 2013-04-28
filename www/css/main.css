@@ -1,24 +1,5 @@
 
 
-.briefLink{
-    display: none; 
-    }
-    
-
-.textMessageLink{
-    display: none; 
-    }
-    
-#lacyText2, #lacyText3, #lacyText4, #lacyText5, #carolineText2, #carolineText3, #georgeText2, #georgeText3, #georgeText4, #georgeText5, #georgeText6, #georgeText7, #georgeText8, #georgeText9, #persisText2, #persisText3, #persisText4, #stormAlert2 {
-    display: none; 
-}
-
-.statPage{
-                background-size: contain;
-                background-position: center center;
-                background-repeat: no-repeat;
-}
-
 .textMessageFrom{
     background-color: #FF9966;
      width: 100px;
